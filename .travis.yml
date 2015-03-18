@@ -12,3 +12,4 @@ sbt_args: -Dmacroparser.scala.home="scala-macroparser/build/pack"
 
 script:
   - sbt ++$TRAVIS_SCALA_VERSION clean update cmp tests/test
+
