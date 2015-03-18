@@ -4,7 +4,7 @@ scala:
   - 2.11.6
 
 before_install:
- - git clone -b macroparser git@github.com:Duhemm/scala.git scala-macroparser
+ - git clone -b macroparser https://github.com/Duhemm/parsermacros.git scala-macroparser
  - cd scala-macroparser
  - ant
 
@@ -12,4 +12,3 @@ sbt_args: -Dmacroparser.scala.home="scala-macroparser/build/pack"
 
 script:
   - sbt ++$TRAVIS_SCALA_VERSION clean update cmp tests/test
-
