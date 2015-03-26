@@ -14,8 +14,6 @@ import scala.collection.mutable
 trait HijackSyntaxAnalyzer { self: NscPlugin =>
 
   def hijackSyntaxAnalyzer(): Unit = {
-    println("Hijacking")
-
     val syntaxAnalyzer = new { val global: self.global.type = self.global } with ParserMacroSyntaxAnalyzer
     val syntaxAnalyzerField = classOf[Global].getDeclaredField("syntaxAnalyzer")
     syntaxAnalyzerField.setAccessible(true)
@@ -32,7 +30,7 @@ trait HijackSyntaxAnalyzer { self: NscPlugin =>
       phasesSet += newParser
       val phasesDescMapGetter = classOf[Global].getDeclaredMethod("phasesDescMap")
       val phasesDescMap = phasesDescMapGetter.invoke(global).asInstanceOf[mutable.Map[SubComponent, String]]
-      phasesDescMap(newParser) = "parse palladium source into ASTs, perform simple desugaring"
+      phasesDescMap(newParser) = "parse source into ASTs, accept parser macros, perform simple desugaring"
     }
 
     if (global.reporter.isInstanceOf[ReplReporter] && global.toString != "<hijacked global>") {
