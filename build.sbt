@@ -1,6 +1,7 @@
 val scalaHomeProperty = "macroparser.scala.home"
 lazy val sharedSettings: Seq[Setting[_]] = Seq(
   version := "0.1.0-SNAPSHOT",
+  organization := "com.github.duhemm",
   scalaVersion := "2.11.6",
   resolvers += "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots",
   libraryDependencies += "org.scalameta" %% "scalameta" % "0.1.0-SNAPSHOT",
@@ -57,6 +58,7 @@ lazy val plugin: Project =
   (project in file("plugin")) settings (
     sharedSettings: _*
   ) settings (
+    name := "parsermacros-plugin",
     libraryDependencies <+= (scalaVersion)("org.scala-lang" % "scala-compiler" % _),
     libraryDependencies += "org.scalameta" % "scalahost" % "0.1.0-SNAPSHOT" cross CrossVersion.full,
     assemblyOption in assembly := (assemblyOption in assembly).value.copy(includeScala = false, includeDependency = true),
